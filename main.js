@@ -7,6 +7,8 @@ class CountdownTimer {
   }
   start() {
     const expectDay = this.targetDate.getTime();
+    console.log(expectDay);
+    console.log(this.targetDate);
 
     const day = document.querySelector(`${this.selector} [data-value="days"]`);
     const hour = document.querySelector(
@@ -22,7 +24,9 @@ class CountdownTimer {
     setInterval(() => {
       const currentTime = new Date().getTime();
       const deltaTime = expectDay - currentTime;
-
+      function pad(value) {
+        return String(value).padStart(2, "0");
+      }
       const days = pad(Math.floor(deltaTime / (1000 * 60 * 60 * 24)));
       const hours = pad(
         Math.floor((deltaTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
@@ -46,7 +50,3 @@ const myTimer = new CountdownTimer({
 });
 
 myTimer.start();
-
-function pad(value) {
-  return String(value).padStart(2, "0");
-}
